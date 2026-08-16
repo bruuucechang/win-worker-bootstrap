@@ -185,7 +185,10 @@ if($SkipTools){
   $pkgs = @(
     @{ Id = 'Git.Git';            Cmd = 'git';    Name = 'Git' },
     @{ Id = 'OpenJS.NodeJS.LTS';  Cmd = 'node';   Name = 'Node.js LTS' },
-    @{ Id = 'Python.Python.3.12'; Cmd = 'python'; Name = 'Python 3.12' }
+    @{ Id = 'Python.Python.3.12'; Cmd = 'python'; Name = 'Python 3.12' },
+    # jq 是 Claude Code 的 PreToolUse 掛勾（擋錯作者的 commit）用的。沒有它的話
+    # 那個掛勾每次 git commit 都會炸——而症狀出現在 commit 當下，離「機器沒裝好」很遠。
+    @{ Id = 'jqlang.jq';          Cmd = 'jq';     Name = 'jq' }
   )
   if(-not $SkipDocker){
     $pkgs += @{ Id = 'Docker.DockerDesktop'; Cmd = 'docker'; Name = 'Docker Desktop' }

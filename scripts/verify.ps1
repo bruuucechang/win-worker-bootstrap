@@ -82,11 +82,12 @@ else {
 }
 
 Sec "工具"
-foreach($t in 'git','node','python','docker','claude'){
+foreach($t in 'git','node','python','jq','docker','claude'){
   $c = Get-Command $t -ErrorAction SilentlyContinue
   if($c){ Good "$t -> $($c.Source)" }
   elseif($t -eq 'claude'){ Meh "claude 沒裝（只在要派 Claude Code 工作時才需要）" }
   elseif($t -eq 'docker'){ Meh "docker 沒裝（只在要跑服務時才需要）" }
+  elseif($t -eq 'jq'){ Bad "jq 沒裝——Claude Code 的 PreToolUse 掛勾靠它，缺了每次 git commit 都會炸" }
   else { Bad "$t 沒裝或還沒進 PATH（剛裝完要新開殼層）" }
 }
 
